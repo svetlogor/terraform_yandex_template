@@ -27,7 +27,7 @@ resource "yandex_compute_disk" "boot-disk-2" {
   image_id = "fd861t36p9dqjfrqm0g4"
 }
 
-data "yandex_vpc_subnet" "default-ru-central1-b" {
+data "yandex_vpc_subnet" "network1-b" {
   name = "default-ru-central1-b"
 }
 
@@ -44,7 +44,7 @@ resource "yandex_compute_instance" "build" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.default-ru-central1-b.id
+    subnet_id = data.yandex_vpc_subnet.network1-b.id
     nat       = true
   }
 
@@ -66,7 +66,7 @@ resource "yandex_compute_instance" "prod" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.default-ru-central1-b.id
+    subnet_id = data.yandex_vpc_subnet.network1-b.id
     nat       = true
   }
 
