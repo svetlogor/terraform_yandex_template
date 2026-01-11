@@ -40,7 +40,7 @@ resource "yandex_compute_instance" "build" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
+    subnet_id = yandex_vpc_subnet.default-ru-central1-b.id
     nat       = true
   }
 
@@ -62,11 +62,27 @@ resource "yandex_compute_instance" "prod" {
   }
 
   network_interface {
-    subnet_id = yandex_vpc_subnet.subnet-1.id
+    subnet_id = yandex_vpc_subnet.default-ru-central1-b.id
     nat       = true
   }
 
   metadata = {
     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
+}
+
+output "internal_ip_address_vm_1" {
+  value = yandex_compute_instance.build.network_interface.0.ip_address
+}
+
+output "internal_ip_address_vm_2" {
+  value = yandex_compute_instance.prod.network_interface.0.ip_address
+}
+
+output "external_ip_address_vm_1" {
+  value = yandex_compute_instance.build.network_interface.0.nat_ip_address
+}
+
+output "external_ip_address_vm_2" {
+  value = yandex_compute_instance.prod.network_interface.0.nat_ip_address
 }
