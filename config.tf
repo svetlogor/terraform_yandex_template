@@ -28,8 +28,10 @@ resource "yandex_compute_disk" "boot-disk-2" {
 }
 
 data "yandex_vpc_subnet" "network1-b" {
-  name = "default-ru-central1-b"
-  folder_id = "b1geffa51bekseqrd9c5"
+  id = "e2lljsmqmc67m6ffcn92"
+  # name = "default-ru-central1-b"
+  # network_id = ""
+  # folder_id = "b1geffa51bekseqrd9c5"
 }
 
 resource "yandex_compute_instance" "build" {
