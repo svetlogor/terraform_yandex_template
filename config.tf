@@ -9,7 +9,6 @@ terraform {
 
 provider "yandex" {
   zone = "ru-central1-b"
-  folder_id = "b1geffa51bekseqrd9c5"
 }
 
 resource "yandex_compute_disk" "boot-disk-1" {
